@@ -12,7 +12,7 @@
 | `moo_optimization/`     | `data/` (forecast matrices) · `models/` (Pareto fronts) · `figures/` · `data_adaptation.py` · `moo_microgrid.ipynb`                                                                                                             | Day‑ahead scheduling via NSGA‑II/III & SPEA2                                                                     |
 | `microgrid_kappa/`      | `data/`, `image/`, `import_dashboard/`, `models/` · `consumer.py`, `producer_solar.py`, `producer_eolico.py` · `generacion_datos.ipynb` · `docker-compose.yml`                                                                  | Real‑time dashboard & synthetic‑data generator powered by **Kappa** architecture (producers → Kafka → dashboard) |
 | `xAI/`                  | `FV_xAI.ipynb`, `Wind_xAI.ipynb`, `xAI_multiagente.ipynb`                                                                                                                                                                       | Links model insights with agent decisions                                                                        |
-| `requirements.txt`      | Python dependencies                                                                                                                                                                                                             | Reproducibility                                                                                                  |
+
 
 ---
 
