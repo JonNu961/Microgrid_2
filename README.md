@@ -1,28 +1,44 @@
-# Microgrid_2
+# Microgrid\_2
 
-**Microgrid\_2** is an academic prototype that explores how solar‑photovoltaic and wind generators can coordinate in a smart micro‑grid through:
-
-1. **Multi‑Agent Negotiation** – solar and wind agents place hourly bids using *reveal*, *hide* and *bluffing* strategies.
-2. **Explainable Forecasting** – LightGBM models predict next‑day production and are dissected with SHAP, ICE and LIME.
-3. **Multi‑Objective Optimisation (MOO)** – day‑ahead schedules are optimised to maximise producer revenue and minimise consumer cost under reliability constraints.
+**Microgrid\_2** is a research sandbox that blends **multi‑agent negotiation**, **explainable forecasting**, **multi‑objective optimisation** and **real‑time visualisation** to study renewable micro‑grids with solar‑PV and wind resources.
 
 ---
 
 ## Repository layout
 
-| Path                    | Main contents                                                                                                                                                                                                                                                                                                                                  | Purpose                                  |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `Sistema_Multiagentes/` | • `Agentes/` – Python classes for Solar & Wind agents and negotiation logic.  • `CSV_Generados/` – logs from simulation runs (offers, penalties, balances).  • `Data/` – pre‑processed weather & demand series.  • `Modelos_Entrenados/` – pickled forecasting models.  • `Analisis.ipynb` – notebook that executes >8 000 negotiation rounds. | Core hourly market simulation            |
-| `moo_optimization/`     | • `data/` – matrices for the optimiser (predicted generation, tariffs, demand).  • `models/` – Pareto fronts & checkpoints.  • `figures/` – plots produced by the notebooks.  • `data_adaptation.py` – reshapes simulation output.  • `moo_microgrid.ipynb` – NSGA‑II/III & SPEA2 experiments.                                                 | Finds cost‑efficient day‑ahead schedules |
-| `xAI/`                  | • `FV_xAI.ipynb` – explainability for the solar model.  • `Wind_xAI.ipynb` – explainability for the wind model.  • `xAI_multiagente.ipynb` – links model insights with agent decisions.                                                                                                                                                        | Explains why bluffing emerges as optimal |
-
+| Path                    | Key contents                                                                                                                                                                                                                    | Role                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `Sistema_Multiagentes/` | `Agentes/` (Python classes for Solar & Wind agents and negotiation rules) · `CSV_Generados/` (logs) · `Data/` (weather & demand) · `Modelos_Entrenados/` (pre‑trained forecasters) · `Analisis.ipynb` (>8 000 simulated rounds) | Hour‑by‑hour market simulation                                                                                   |
+| `moo_optimization/`     | `data/` (forecast matrices) · `models/` (Pareto fronts) · `figures/` · `data_adaptation.py` · `moo_microgrid.ipynb`                                                                                                             | Day‑ahead scheduling via NSGA‑II/III & SPEA2                                                                     |
+| `microgrid_kappa/`      | `data/`, `image/`, `import_dashboard/`, `models/` · `consumer.py`, `producer_solar.py`, `producer_eolico.py` · `generacion_datos.ipynb` · `docker-compose.yml`                                                                  | Real‑time dashboard & synthetic‑data generator powered by **Kappa** architecture (producers → Kafka → dashboard) |
+| `xAI/`                  | `FV_xAI.ipynb`, `Wind_xAI.ipynb`, `xAI_multiagente.ipynb`                                                                                                                                                                       | Links model insights with agent decisions                                                                        |
+| `requirements.txt`      | Python dependencies                                                                                                                                                                                                             | Reproducibility                                                                                                  |
 
 ---
 
 ## Quick start
 
-1. Open `Sistema_Multiagentes/Analisis.ipynb` to reproduce the hourly negotiation study.
-2. Run `moo_optimization/data_adaptation.py` followed by `moo_optimization/moo_microgrid.ipynb` for the optimisation stage.
-3. Explore the notebooks in `xAI/` for model interpretability.
+```bash
+# clone repo and create environment
+git clone https://github.com/<user>/Microgrid_2.git
+cd Microgrid_2
+python -m venv .venv && source .venv/bin/activate  # optional but recommended
+pip install -r requirements.txt
+```
+
+1. **Hourly negotiation** – open `Sistema_Multiagentes/Analisis.ipynb` and run all cells.
+2. **Day‑ahead optimisation** – execute `moo_optimization/data_adaptation.py` then `moo_optimization/moo_microgrid.ipynb`.
+3. **Explainability** – explore notebooks inside `xAI/`.
+4. **Real‑time visualisation (optional)** –
+
+   ```bash
+   cd microgrid_kappa
+   docker-compose up --build
+   ```
+
+   Stream processors will publish solar/wind data; open the generated dashboard URL to monitor the micro‑grid live.
+
+---
+
 
 
