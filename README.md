@@ -15,7 +15,7 @@
 | `Sistema_Multiagentes/` | • `Agentes/` – Python classes for Solar & Wind agents and negotiation logic.  • `CSV_Generados/` – logs from simulation runs (offers, penalties, balances).  • `Data/` – pre‑processed weather & demand series.  • `Modelos_Entrenados/` – pickled forecasting models.  • `Analisis.ipynb` – notebook that executes >8 000 negotiation rounds. | Core hourly market simulation            |
 | `moo_optimization/`     | • `data/` – matrices for the optimiser (predicted generation, tariffs, demand).  • `models/` – Pareto fronts & checkpoints.  • `figures/` – plots produced by the notebooks.  • `data_adaptation.py` – reshapes simulation output.  • `moo_microgrid.ipynb` – NSGA‑II/III & SPEA2 experiments.                                                 | Finds cost‑efficient day‑ahead schedules |
 | `xAI/`                  | • `FV_xAI.ipynb` – explainability for the solar model.  • `Wind_xAI.ipynb` – explainability for the wind model.  • `xAI_multiagente.ipynb` – links model insights with agent decisions.                                                                                                                                                        | Explains why bluffing emerges as optimal |
-| `requirements.txt`      | Python dependencies                                                                                                                                                                                                                                                                                                                            | Reproducibility                          |
+
 
 ---
 
