@@ -1,0 +1,68 @@
+# No es necesario en las últimas actualizaciones de Docker.
+# version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - influx-grafana-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - influx-grafana-network
+
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: jonnu           
+      DOCKER_INFLUXDB_INIT_PASSWORD: 135246357        
+      DOCKER_INFLUXDB_INIT_ORG: mondragon              
+      DOCKER_INFLUXDB_INIT_BUCKET: microgrid_v2       
+    volumes:
+      - influxdb-storage:/var/lib/influxdb2
+    networks:
+      - influx-grafana-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"  # Puerto para acceder a Grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin  # Contraseña de administrador de Grafana
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    depends_on:
+      - influxdb
+    networks:
+      - influx-grafana-network
+
+networks:
+  influx-grafana-network:
+    driver: bridge
+
+volumes:
+  influxdb-storage:
+  grafana-storage:
