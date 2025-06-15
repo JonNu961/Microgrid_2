@@ -18,18 +18,12 @@
 
 ## Quick start
 
-```bash
-# clone repo and create environment
-git clone https://github.com/<user>/Microgrid_2.git
-cd Microgrid_2
-python -m venv .venv && source .venv/bin/activate  # optional but recommended
-pip install -r requirements.txt
-```
+
 
 1. **Hourly negotiation** – open `Sistema_Multiagentes/Analisis.ipynb` and run all cells.
 2. **Day‑ahead optimisation** – execute `moo_optimization/data_adaptation.py` then `moo_optimization/moo_microgrid.ipynb`.
 3. **Explainability** – explore notebooks inside `xAI/`.
-4. **Real‑time visualisation (optional)** –
+4. **Real‑time visualisation: KAFKA + INFLUX DB + GRAFANA** –
 
    ```bash
    cd microgrid_kappa
