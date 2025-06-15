@@ -1,7 +1,5 @@
 # Microgrid_2
 
-# Microgrid\_2
-
 **Microgrid\_2** is an academic prototype that explores how solar‑photovoltaic and wind generators can coordinate in a smart micro‑grid through:
 
 1. **Multi‑Agent Negotiation** – solar and wind agents place hourly bids using *reveal*, *hide* and *bluffing* strategies.
@@ -23,18 +21,8 @@
 
 ## Quick start
 
-```bash
-# clone repo and set up environment
-git clone https://github.com/<user>/Microgrid_2.git
-cd Microgrid_2
-python -m venv .venv && source .venv/bin/activate    # optional but recommended
-pip install -r requirements.txt
-```
-
 1. Open `Sistema_Multiagentes/Analisis.ipynb` to reproduce the hourly negotiation study.
 2. Run `moo_optimization/data_adaptation.py` followed by `moo_optimization/moo_microgrid.ipynb` for the optimisation stage.
 3. Explore the notebooks in `xAI/` for model interpretability.
 
----
 
-Released under the MIT License.
